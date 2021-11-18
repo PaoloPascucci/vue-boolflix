@@ -1,41 +1,52 @@
 <template>
-  <div>
-    
-      <button type="button">Submit</button>
-  </div>
+<div>
+    <div class="header">
+    <Search :filmSearch="searchText" @search_film="UserInput"/>
+    <movie
+    v-for="movie in Movies"
+    :key="movie.id"
+    title="movie.title"
+    original="movie.original_title"
+    language="movie.original_language"
+    vote="movie.vote_average"
+     />
+</div>
+</div>
+  
 </template>
 
 <script>
 import axios from "axios";
+import Search from"./Search.vue"
 export default {
-        data(){
+    components: {
+        Search
+    },
+  data() {
     return {
       Movies: [],
-      }
-      },
-  mounted() {
-      setTimeout(this.Callapi, 1000)
-;
+      searchText:"",
+    };
   },
   methods: {
-
-   Callapi(){
-           axios
-      .get("https://flynn.boolean.careers/exercises/api/array/music")
-      .then((response) => {
-        this.Movies = response.data.response;
-      })
-   },
-}}
+    UserInput(text) {
+        this.searchText = text
+      axios
+        .get(`https://api.themoviedb.org/3/movie?api_key=2a36e3808dc852382706a41d635e3434e&query=${this.searchText}`)
+        .then((response) => {
+          this.Movies = response.data.results;
+        });
+    },
+  },
+};
 </script>
 
 <style>
-div{
-    height: 100vh;
+.header {
+  height: 100px;
+  text-align: center;
 }
-button{
-    text-align: center;
-    width: 100px;
-    height: 100px;
+ul{
+    list-style: none;
 }
 </style>
