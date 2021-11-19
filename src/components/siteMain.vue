@@ -5,21 +5,21 @@
       <div class="containerr">
         <h2>FIlm</h2>
         <div class="movie">
-          <movie v-for="movie in movies" :key="movie.id">
+          <div class="UserMovie" v-for="movie in movies" :key="movie.id">
             <h3>{{ movie.title }}</h3>
             <p class="orT">{{ movie.original_title }}</p>
             <flag :iso="movie.original_language" />
             <p class="Va">{{ movie.vote_average }}</p>
-          </movie>
+          </div>
         </div>
         <h2>Serie TV</h2>
         <div class="show">
-          <show v-for="show in shows" :key="show.id">
-            <h3>{{show.title}}</h3>
-            <p class="orT">{{ show.original_title }}</p>
+          <div class="UserShow" v-for="show in shows" :key="show.id">
+            <h3>{{show.name}}</h3>
+            <p class="orT">{{ show.original_name }}</p>
             <flag :iso="show.original_language" />
             <p class="Va">{{ show.vote_average }}</p>
-          </show>
+          </div>
         </div>
       </div>
     </div>
@@ -83,9 +83,6 @@ ul {
   align-self: center;
   width: 80%;
 }
-movie {
-  padding: 1rem;
-}
 .orT,
 #orL,
 .Va,
@@ -98,4 +95,9 @@ h3 {
 .Va {
   color: red;
 }
+.UserMovie, .UserShow{
+  padding: 1rem;
+  width:200px;
+}
+
 </style>
