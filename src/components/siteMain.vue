@@ -3,23 +3,15 @@
     <div class="header">
     <Search :filmSearch="searchText" @search_film="UserInput"/>
     <div class="containerr">
-
     <movie
-    v-for="movie in movies"
-    :key="movie.id">
-    <h3>
-        {{movie.title}}
-    </h3>
-    <p class="orT">
-        {{movie.original_title}}
-    </p>
-    <p class="orL">
-        {{movie.original_language}}
-    </p>
-    <p class="Va">
-        {{movie.vote_average}}
-    </p>
+    v-for="movie in movies" :key="movie.id" >
+    <h3>{{movie.title}}</h3>
+    <p class="orT">{{movie.original_title}}</p>
+    <p id="orL">{{movie.original_language}}</p>
+    <flag :iso="movie.original_language" />
+    <p class="Va">{{movie.vote_average}}</p>
     </movie>
+      
     </div>
 </div>
 </div>
@@ -32,6 +24,7 @@ import Search from"./Search.vue"
 export default {
     components: {
         Search,
+        
     },
   data() {
     return {
@@ -71,13 +64,14 @@ movie{
 h3{
     color :white;
 }
-.orT, .orL, .Va{
+.orT, #orL, .Va{
     font-weight: bold;
 }
-.orL{
+#orL{
     color: greenyellow;
 }
 .Va{
     color :red;
 }
+
 </style>

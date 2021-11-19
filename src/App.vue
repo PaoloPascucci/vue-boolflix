@@ -10,7 +10,8 @@ import siteMain from "./components/siteMain.vue" ;
 export default {
   name: 'App',
   components: {
-    siteMain
+    siteMain,
+    
   }
 }
 </script>
