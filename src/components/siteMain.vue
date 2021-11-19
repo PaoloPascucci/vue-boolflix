@@ -6,6 +6,7 @@
         <h2>FIlm</h2>
         <div class="movie">
           <div class="UserMovie" v-for="movie in movies" :key="movie.id">
+            <img :src="`https://image.tmdb.org/t/p/w185/${movie.poster_path}`" :alt="movie.title">
             <h3>{{ movie.title }}</h3>
             <p class="orT">{{ movie.original_title }}</p>
             <flag :iso="movie.original_language" />
@@ -15,6 +16,7 @@
         <h2>Serie TV</h2>
         <div class="show">
           <div class="UserShow" v-for="show in shows" :key="show.id">
+            <img :src="`https://image.tmdb.org/t/p/w185/${show.poster_path}`" :alt="show.title">
             <h3>{{show.name}}</h3>
             <p class="orT">{{ show.original_name }}</p>
             <flag :iso="show.original_language" />
@@ -38,6 +40,7 @@ export default {
       movies: [],
       shows: [],
       searchText: "",
+      http:"",
     };
   },
   methods: {
