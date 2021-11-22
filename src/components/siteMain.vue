@@ -1,8 +1,7 @@
 <template>
   <div class="Cont"> 
-    <div class="header">
-      <Search :filmSearch="searchText" @search_film="UserInput" />
-      <div class="containerr">
+    <SiteHeader :filmSearch="searchText" @search_film="UserInput" />
+          <div class="containerr">
         <h2>Film</h2>
         <div class="movie">
           <div class="UserMovie" v-for="movie in movies" :key="movie.id">
@@ -48,16 +47,15 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Search from "./Search.vue";
+import SiteHeader from "./components/SiteHeader.vue";
 export default {
-  components: {
-    Search,
+  components:{
+    SiteHeader,
   },
   data() {
     return {
@@ -94,15 +92,14 @@ export default {
 h2 {
   margin: 1rem;
 }
-.header {
-  text-align: center;
-}
+
 ul {
   list-style: none;
 }
 .containerr {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 .movie,
 .show {
