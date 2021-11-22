@@ -3,24 +3,48 @@
     <div class="header">
       <Search :filmSearch="searchText" @search_film="UserInput" />
       <div class="containerr">
-        <h2>FIlm</h2>
+        <h2>Film</h2>
         <div class="movie">
           <div class="UserMovie" v-for="movie in movies" :key="movie.id">
+            <div v-if="movie.poster_path !=null">
             <img :src="`https://image.tmdb.org/t/p/w185/${movie.poster_path}`" :alt="movie.title">
+            </div>
+            <div v-else>
+              <img height=278px width="185px" :src="'https://http.cat/204'" :alt="movie.title">
+            </div>
             <h3>{{ movie.title }}</h3>
             <p class="orT">{{ movie.original_title }}</p>
-            <flag :iso="movie.original_language" />
-            <p class="Va">{{ movie.vote_average }}</p>
+            <flag :iso="movie.original_language"/>
+            <div class="star">
+            <div v-for="Star in parseInt((movie.vote_average / 2).toFixed(0))" :key="Star.id">
+            <i class="fas fa-star"></i>
+            </div>
+            <div v-for="emptyStar in parseInt(5 - (movie.vote_average / 2).toFixed(0))" :key="emptyStar.id">
+            <i class="far fa-star"></i>
+            </div>
+            </div>
           </div>
         </div>
         <h2>Serie TV</h2>
         <div class="show">
           <div class="UserShow" v-for="show in shows" :key="show.id">
-            <img :src="`https://image.tmdb.org/t/p/w185/${show.poster_path}`" :alt="show.title">
+              <div v-if="show.poster_path !=null">
+                <img :src="`https://image.tmdb.org/t/p/w185/${show.poster_path}`" :alt="show.title">
+            </div>
+            <div v-else>
+              <img height=278px width="185px" :src="'https://http.cat/204'" :alt="show.title">
+              </div>
             <h3>{{show.name}}</h3>
             <p class="orT">{{ show.original_name }}</p>
             <flag :iso="show.original_language" />
-            <p class="Va">{{ show.vote_average }}</p>
+            <div class="star">
+            <div v-for="Star in parseInt((show.vote_average / 2).toFixed(0))" :key="Star.id">
+            <i class="fas fa-star"></i>
+            </div>
+            <div v-for="emptyStar in parseInt(5 - (show.vote_average / 2).toFixed(0))" :key="emptyStar.id">
+            <i class="far fa-star"></i>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -40,7 +64,8 @@ export default {
       movies: [],
       shows: [],
       searchText: "",
-      http:"",
+      http: "",
+      
     };
   },
   methods: {
@@ -79,7 +104,8 @@ ul {
   display: flex;
   flex-direction: column;
 }
-.movie, .show{
+.movie,
+.show {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -98,9 +124,17 @@ h3 {
 .Va {
   color: red;
 }
-.UserMovie, .UserShow{
+.UserMovie,
+.UserShow {
   padding: 1rem;
-  width:200px;
+  width: 200px;
 }
-
+.star{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+i{
+  color: #ffd43b
+}
 </style>
